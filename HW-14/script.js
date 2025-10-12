@@ -6,11 +6,10 @@ const Transaction = {
 const account = {
   balance: 0,
   transactions: [],
-  transactionId: 0,
 
   createTransaction(amount, type) {
     return {
-      id: ++this.transactionId,
+      id: this.transactions.length + 1,
       type,
       amount,
     };
@@ -24,7 +23,7 @@ const account = {
 
   withdraw(amount) {
     if (amount > this.balance) {
-      console.log('Insufficient funds!');
+      console.log('Withdrawal not possible, insufficient funds.');
       return;
     }
     this.balance -= amount;
@@ -37,25 +36,20 @@ const account = {
   },
 
   getTransactionDetails(id) {
-    const transaction = this.transactions.find(tr => tr.id === id);
-    if (!transaction) return null;
-
-    const { id: transId, type, amount } = transaction;
-    return { transId, type, amount };
+    return this.transactions.find(({ id: transId }) => transId === id) || null;
   },
 
   getTransactionTotal(type) {
     return this.transactions
-      .filter(({ type: trType }) => trType === type) 
-      .reduce((total, { amount }) => total + amount, 0); 
+      .filter(({ type: transType }) => transType === type)
+      .reduce((total, { amount }) => total + amount, 0);
   },
 };
 
 account.deposit(500);
 account.withdraw(200);
-account.deposit(300);
+account.deposit(1000);
 
-console.log('Balance:', account.getBalance()); 
-console.log('Transaction #2:', account.getTransactionDetails(2));
+console.log('Balance:', account.getBalance());
+console.log('Transaction 2 details:', account.getTransactionDetails(2));
 console.log('Total deposits:', account.getTransactionTotal(Transaction.DEPOSIT));
-console.log('Total withdrawals:', account.getTransactionTotal(Transaction.WITHDRAW));
