@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>DOM Homework</title>
+</head>
+<body>
+
+  <!-- Task 1 -->
+  <h2>Task 1</h2>
+  <input type="text" id="textInput" placeholder="Type text" />
+  <button id="changeButton">Click me</button>
+
+  <!-- Task 2 -->
+  <h2>Task 2</h2>
+  <h3>Image Change</h3>
+  <img id="myImage" src="https://via.placeholder.com/150" width="150"/>
+
+  <!-- Task 3 -->
+  <h2>Task 3</h2>
+  <a id="myLink" href="https://google.com" target="_blank">Visit Google</a><br />
+  <img id="imgWithAlt" src="https://via.placeholder.com/120" width="120"/>
+
+  <!-- Task 4 -->
+  <h2>Task 4</h2>
+  <ul id="myList">
+    <li>Old text 1</li>
+    <li>Old text 2</li>
+    <li>Old text 3</li>
+  </ul>
+
+  <script>
+    // Task 1
+    const textInput = document.getElementById('textInput');
+    const changeButton = document.getElementById('changeButton');
+    changeButton.textContent = textInput.value;
+
+    textInput.addEventListener('input', () => {
+      changeButton.textContent = textInput.value;
+    });
+
+    // Task 2
+    const img = document.getElementById('myImage');
+    img.src = "https://picsum.photos/200";
+
+    // Task 3
+    const link = document.getElementById('myLink');
+    const imgAlt = document.getElementById('imgWithAlt');
+
+    link.href = "https://wikipedia.org";
+    imgAlt.setAttribute("alt", "Random generated image");
+
+    // Task 4
+    const list = document.getElementById('myList');
+    list.firstElementChild.textContent = "New Updated Text";
+  </script>
+
+</body>
+</html>
